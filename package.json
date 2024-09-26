@@ -1,0 +1,12 @@
+{
+  "name": "api-restaurante",
+  "version": "1.0.0",
+  "description": "Uma API de cadastramento de pedidos em restaurantes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Samuel Colaço",
+  "license": "ISC"
+}
