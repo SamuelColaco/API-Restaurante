@@ -6,7 +6,7 @@
     "lib": ["ES2023"],  
 
     /* Modules */
-    "module": "node16",  
+    "module": "ESNext",  
 
     "esModuleInterop": true,                           
     "forceConsistentCasingInFileNames": true,  
