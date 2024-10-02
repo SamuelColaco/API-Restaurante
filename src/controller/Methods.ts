@@ -55,4 +55,17 @@ export class ProductsControllers{
         }
 
     }
+
+    async delete(req: Request, res: Response, next: NextFunction){
+    try {
+
+        const id = z.string().transform((value) => Number(value)).refine((value) => !isNaN(value), {message: "É necessário ser um número"}).parse(req.params.id)
+        
+
+        res.status(200).send("Deletado")
+        
+    } catch (error) {
+        next(error)
+    }
+    }
 }

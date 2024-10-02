@@ -12,4 +12,6 @@ productsRoutes.post("/products", methods.create)
 
 productsRoutes.put("/products/:id", methods.update)
 
+productsRoutes.delete("/products/:id", methods.delete)
+
 export { productsRoutes }
