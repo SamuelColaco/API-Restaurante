@@ -10,4 +10,6 @@ productsRoutes.get("/", methods.index)
 
 productsRoutes.post("/products", methods.create)
 
+productsRoutes.put("/products/:id", methods.update)
+
 export { productsRoutes }
