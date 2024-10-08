@@ -12,7 +12,7 @@ export function errorHandling(error: any, req: Request,res: Response,next:NextFu
     }
     
     if(error instanceof ZodError){
-        return res.status(400).json({message: "Errod e validação", issues: error.format()})
+        return res.status(400).json({message: "Erro de validação", issues: error.format()})
     }
 
     return res.status(500).json({message: error.message})

@@ -7,6 +7,6 @@ export { TablesController } from "../controller/tables"
 const routesTables = Router()
 const tablesController = new TablesController()
 
-routesTables.get("/", tablesController.index)
+routesTables.get("/tables", tablesController.index)
 
 export{ routesTables }

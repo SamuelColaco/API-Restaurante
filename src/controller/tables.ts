@@ -7,7 +7,7 @@ export class TablesController{
         try {
 
             //const tables = await knex<TableRepository>("tables").select()
-            
+            res.status(200).send("É mesas")
         } catch (error) {
             next(error)
         }
