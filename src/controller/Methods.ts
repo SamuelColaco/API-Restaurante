@@ -1,7 +1,7 @@
 
 
 import { Request, Response, NextFunction} from "express"
-import knex from "knex"
+import { knex } from "../database/knex"
 import { z } from "zod"
 
 export class ProductsControllers{
@@ -29,7 +29,7 @@ export class ProductsControllers{
 
             await knex<ProductRepository>("products").insert({name, price})
 
-            res.status(201).send(req.body)
+            res.status(201).json()
         } catch (error) {
             next(error)
         }
@@ -40,7 +40,7 @@ export class ProductsControllers{
 
         try { 
 
-            const { name, price} = req.body
+            const { ...all} = req.body
             const id = z.string().transform((value) => Number(value)).refine((value) => !isNaN(value), {message: "É necessário ser um número"}).parse(req.params.id)
             
             const bodySchema = z.object({
@@ -50,7 +50,7 @@ export class ProductsControllers{
 
             bodySchema.parse(req.body)
 
-            await knex<ProductRepository>("products").update({ name, price}).where({ id })
+            await knex<ProductRepository>("products").update({ ...all, updated_at: knex.fn.now() }).where({ id })
             res.status(200).json()
         } catch (error) {
             next(error)
