@@ -13,6 +13,6 @@ export default {
 
     seeds: {
         extensions: "ts",
-        directory: ".src/database/seeds"
+        directory: "./src/database/seeds"
     }
 }
