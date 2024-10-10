@@ -8,9 +8,9 @@ export class ProductsControllers{
 
     async index(req: Request, res: Response, next: NextFunction){
             try {
-                //const products = await knex<ProductRepository>("products").select()
+                const products = await knex<ProductRepository>("products").select()
 
-                res.status(200).send("Listado")
+                res.status(200).send(products)
             } catch (error) {
                 next(error)
             }
@@ -27,7 +27,7 @@ export class ProductsControllers{
 
             bodySchema.parse(req.body)
 
-            //await knex<ProductRepository>("products").insert({name, price})
+            await knex<ProductRepository>("products").insert({name, price})
 
             res.status(201).send(req.body)
         } catch (error) {
@@ -40,6 +40,7 @@ export class ProductsControllers{
 
         try { 
 
+            const { name, price} = req.body
             const id = z.string().transform((value) => Number(value)).refine((value) => !isNaN(value), {message: "É necessário ser um número"}).parse(req.params.id)
             
             const bodySchema = z.object({
@@ -49,7 +50,8 @@ export class ProductsControllers{
 
             bodySchema.parse(req.body)
 
-            res.status(200).send("Feito")
+            await knex<ProductRepository>("products").update({ name, price}).where({ id })
+            res.status(200).json()
         } catch (error) {
             next(error)
         }
@@ -61,9 +63,8 @@ export class ProductsControllers{
 
         const id = z.string().transform((value) => Number(value)).refine((value) => !isNaN(value), {message: "É necessário ser um número"}).parse(req.params.id)
         
-
-        res.status(200).send("Deletado")
-        
+        await knex<ProductRepository>("products").delete().where({ id })
+        res.status(200).json()
     } catch (error) {
         next(error)
     }
