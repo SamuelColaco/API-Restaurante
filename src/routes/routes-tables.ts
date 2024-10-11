@@ -8,5 +8,6 @@ const routesTables = Router()
 const tablesController = new TablesController()
 
 routesTables.get("/tables", tablesController.index)
+routesTables.post("/tables", tablesController.create)
 
 export{ routesTables }
