@@ -49,8 +49,22 @@ export class TablesController{
 
             bodySchema.parse(req.body)
             await knex<TableRepository>("Mesas").update({ number, updated_at: knex.fn.now()}).where({ id })
-            
+
             res.status(200).json()
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async delete(req: Request, res: Response, next: NextFunction){
+        try {
+        const id = z.string().transform((value) => Number(value)).refine((value) => !isNaN(value)).parse(req.params.id)
+
+        await knex<TableRepository>("Mesas").delete().where({ id })
+        res.status(200).json()
+
+
+        
         } catch (error) {
             next(error)
         }
