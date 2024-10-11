@@ -9,5 +9,6 @@ const tablesController = new TablesController()
 
 routesTables.get("/tables", tablesController.index)
 routesTables.post("/tables", tablesController.create)
+routesTables.put("/tables/:id", tablesController.update)
 
 export{ routesTables }

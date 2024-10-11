@@ -31,8 +31,26 @@ export class TablesController{
             else{
                 throw new AppError("Esse número de mesa já existe")
             }
-            
+
             res.status(201).json()
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async update(req: Request, res: Response, next: NextFunction){
+        try {
+            const { number } = req.body
+            const id = z.string().transform((value) => Number(value)).refine((value) => !isNaN(value)).parse(req.params.id)
+
+            const bodySchema = z.object({
+                number: z.number().gt(0)
+            })
+
+            bodySchema.parse(req.body)
+            await knex<TableRepository>("Mesas").update({ number, updated_at: knex.fn.now()}).where({ id })
+            
+            res.status(200).json()
         } catch (error) {
             next(error)
         }
