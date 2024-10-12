@@ -1,17 +1,12 @@
 
-import { Router } from "express";
-import { ProductsControllers } from "../controller/Methods";
 
+import { Router } from "express"
+import { Orders } from "../controller/orders"
 
-const productsRoutes = Router()
-const methods = new ProductsControllers()
+const ordersRoutes = Router()
+const ordersController = new Orders()
 
-productsRoutes.get("/", methods.index)
+ordersRoutes.get("/orders", ordersController.index)
+ordersRoutes.post("/orders", ordersController.create)
 
-productsRoutes.post("/products", methods.create)
-
-productsRoutes.put("/products/:id", methods.update)
-
-productsRoutes.delete("/products/:id", methods.delete)
-
-export { productsRoutes }
+export { ordersRoutes } 
